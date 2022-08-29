@@ -77,5 +77,5 @@ def read_mraw_frame(mraw_fname, rows, columns, frame_number):
     seek_bytes = int(frame_bytes * frame_number)
     encoded_data = np.fromfile(mraw_fname, dtype = np.uint8, count = frame_bytes, offset = seek_bytes)
     final_data = np.empty((rows * columns,), dtype = np.uint16)
-    final_data = nb_read_uint12_prealloc(encoded_data, final_data)
+    final_data = nb_read_uint12_prealloc(encoded_data, final_data).astype(np.int16)
     return final_data.reshape(rows, columns)
